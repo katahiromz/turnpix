@@ -1,0 +1,35 @@
+CC = bcc32
+CFLAGS = -w -O2
+#CFLAGS = -w -v -y
+OBJS =  bitmap.obj gif.obj jpeg.obj png.obj tiff.obj
+
+all: turnpix.exe turn.exe
+
+turnpix.exe: turnpix.rc resource.h turnpix.obj $(OBJS)
+	$(CC) $(CFLAGS) -W -eturnpix.exe turnpix.obj $(OBJS)
+	brc32 turnpix
+
+turn.exe: turn.obj $(OBJS)
+	$(CC) $(CFLAGS) -WC -eturn.exe turn.obj $(OBJS)
+
+turn.obj: turn.c turnpix.h
+	$(CC) -c $(CFLAGS) -oturn.obj turn.c
+turnpix.obj: turnpix.c turnpix.h resource.h
+	$(CC) -c $(CFLAGS) -oturnpix.obj turnpix.c
+bitmap.obj: bitmap.c
+	$(CC) -c $(CFLAGS) -obitmap.obj bitmap.c
+gif.obj: gif.c
+	$(CC) -c $(CFLAGS) -ogif.obj gif.c
+jpeg.obj: jpeg.c
+	$(CC) -c $(CFLAGS) -ojpeg.obj jpeg.c
+png.obj: png.c
+	$(CC) -c $(CFLAGS) -opng.obj png.c
+tiff.obj: tiff.c
+	$(CC) -c $(CFLAGS) -otiff.obj tiff.c
+
+clean:
+	if exist *.obj del *.obj
+	if exist *.res del *.res
+	if exist *.tds del *.tds
+	if exist *.td2 del *.td2
+	if exist *.tr2 del *.tr2

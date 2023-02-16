@@ -1,0 +1,281 @@
+#include <windows.h>
+#include <dlgs.h>
+#include "resource.h"
+
+1 ICON "turnpix.ico"
+
+1 24 "turnpix.exe.Manifest"
+
+1 ACCELERATORS
+{
+    "O", ID_OPEN, VIRTKEY, CONTROL
+    "S", ID_SAVEAS, VIRTKEY, SHIFT, CONTROL
+    "A", ID_ANGLE, VIRTKEY, CONTROL
+    VK_LEFT, ID_MINUS0_1, VIRTKEY, SHIFT, CONTROL
+    VK_RIGHT, ID_PLUS0_1, VIRTKEY, SHIFT, CONTROL
+    VK_LEFT, ID_MINUS1, VIRTKEY, CONTROL
+    VK_RIGHT, ID_PLUS1, VIRTKEY, CONTROL
+    VK_UP, ID_MINUS10, VIRTKEY, CONTROL
+    VK_DOWN, ID_PLUS10, VIRTKEY, CONTROL
+    VK_UP, ID_MINUS30, VIRTKEY, SHIFT, CONTROL
+    VK_DOWN, ID_PLUS30, VIRTKEY, SHIFT, CONTROL
+    "I", ID_ZOOMIN, VIRTKEY, CONTROL
+    "U", ID_ZOOMOUT, VIRTKEY, CONTROL
+    "G", ID_GROW, VIRTKEY, CONTROL
+    "B", ID_BACK, VIRTKEY, CONTROL
+    VK_F1, ID_ABOUT, VIRTKEY
+}
+
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+
+1 MENU
+{
+    POPUP "&File"
+    {
+        MENUITEM "&Open...\tCtrl+O", ID_OPEN
+        MENUITEM "Save &As...\tShift+Ctrl+S", ID_SAVEAS
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit\tAlt+F4", ID_EXIT
+    }
+    POPUP "&Zoom"
+    {
+        MENUITEM "Zoom &In\tCtrl+I", ID_ZOOMIN
+        MENUITEM "Zoom &Out\tCtrl+U", ID_ZOOMOUT
+        MENUITEM SEPARATOR
+        MENUITEM "25%", ID_ZOOM25
+        MENUITEM "50%", ID_ZOOM50
+        MENUITEM "100%", ID_ZOOM100
+        MENUITEM "150%", ID_ZOOM150
+        MENUITEM "200%", ID_ZOOM200
+    }
+    POPUP "&Rotate"
+    {
+        MENUITEM "-0.1 Degree\tShift+Ctrl+Left", ID_MINUS0_1
+        MENUITEM "+0.1 Degree\tShift+Ctrl+Right", ID_PLUS0_1
+        MENUITEM "-1 Degree\tCtrl+Left", ID_MINUS1
+        MENUITEM "+1 Degree\tCtrl+Right", ID_PLUS1
+        MENUITEM "-10 Degrees\tCtrl+Up", ID_MINUS10
+        MENUITEM "+10 Degrees\tCtrl+Down", ID_PLUS10
+        MENUITEM "-30 Degrees\tShift+Ctrl+Up", ID_MINUS30
+        MENUITEM "+30 Degrees\tShift+Ctrl+Down", ID_PLUS30
+        MENUITEM "-90 Degrees", ID_MINUS90
+        MENUITEM "+90 Degrees", ID_PLUS90
+        MENUITEM SEPARATOR
+        MENUITEM "By &Angle...\tCtrl+A", ID_ANGLE
+        MENUITEM SEPARATOR
+        MENUITEM "&Grow\tCtrl+G", ID_GROW
+    }
+    POPUP "&Background"
+    {
+        MENUITEM "&Transparent", ID_TRANS
+        MENUITEM "&Background Color...\tCtrl+B", ID_BACK
+    }
+    POPUP "&Help"
+    {
+        MENUITEM "&About TurnPix", ID_ABOUT
+    }
+}
+
+IDD_ANGLE DIALOG 0, 0, 135, 55
+STYLE DS_MODALFRAME | DS_CENTER | WS_CAPTION | WS_SYSMENU
+CAPTION "Enter Angle"
+FONT 8, "MS Shell Dlg"
+{
+    LTEXT           "&Angle:", -1, 10, 10, 30, 10
+    EDITTEXT        edt1, 40, 7, 40, 14
+    LTEXT           "Degree(s)", -1, 90, 10, 30, 10
+    DEFPUSHBUTTON   "OK", IDOK, 20, 30, 45, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 75, 30, 45, 14
+}
+
+IDD_ABOUT DIALOG 0, 0, 150, 90
+STYLE DS_MODALFRAME | DS_CENTER | WS_CAPTION | WS_SYSMENU
+CAPTION "About TurnPix"
+FONT 8, "MS Shell Dlg"
+{
+    ICON    1, -1, 10, 10, 18, 21
+    LTEXT   "TurnPix ver. 1.7.1", -1, 36, 12, 105, 10
+    LTEXT   "Katayama Hirofumi MZ", -1, 35, 30, 105, 10
+    LTEXT   "katayama.hirofumi.mz@gmail.com", -1, 35, 46, 105, 10
+    DEFPUSHBUTTON   "OK", IDOK, 52, 70, 45, 14
+}
+
+STRINGTABLE
+{
+    1, "TurnPix by Katayama Hirofumi MZ"
+    2, "%s - TurnPix by Katayama Hirofumi MZ"
+    3, "Pictures (*.bmp;*.gif;*.jpg;*.jpeg;*.jpe;*.jfif;*.png)"
+    4, "*.bmp;*.gif;*.jpg;*.jpeg;*.jpe;*.jfif;*.png"
+    5, "All Files (*.*)"
+    6, "*.*"
+    7, "BMP (*.bmp)"
+    8, "*.bmp"
+    9, "GIF (*.gif)"
+    10, "*.gif"
+    11, "JPEG (*.jpg;*.jpeg;*.jpe;*.jfif)"
+    12, "*.jpg;*.jpeg;*.jpe;*.jfif"
+    13, "PNG (*.png)"
+    14, "*.png"
+    15, "Currently %.2lf Degree(s) Rotated. Zoom Rate %d%%"
+    16, "Ready"
+    17, "Cannot open file."
+    18, "Cannot save file."
+    19, "Saving into this format may cause some loss of color information.\nDo you want to continue?"
+    20, "Input Background Color"
+    21, "Input GIF's Transparent Color"
+    22, "TIFF (*.tif;*.tiff)"
+    23, "*.tif;*.tiff"
+}
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION     1,7,1,0
+PRODUCTVERSION  1,7,1,0
+FILEOS          VOS_NT_WINDOWS32
+FILETYPE        VFT_APP
+{
+    BLOCK "StringFileInfo"
+    {
+        BLOCK "040904B0"
+        {
+            VALUE "CompanyName", "Katayama Hirofumi MZ\0"
+            VALUE "FileDescription", "This program rotates pictures\0"
+            VALUE "FileVersion", "1.7.1\0"
+            VALUE "InternalName", "turnpix\0"
+            VALUE "LegalCopyright", "(C) Katayama Hirofumi MZ. All rights reserved.\0"
+            VALUE "OriginalFilename", "turnpix.exe\0"
+            VALUE "ProductName", "TurnPix\0"
+            VALUE "ProductVersion", "1.7.1\0"
+        }
+    }
+    BLOCK "VarFileInfo"
+    {
+        VALUE "Translation", 0x0409, 0x04B0
+    }
+}
+
+LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+
+1 MENU
+{
+    POPUP "ファイル(&F)"
+    {
+        MENUITEM "開く(&O)...\tCtrl+O", ID_OPEN
+        MENUITEM "名前を付けて保存(&A)...\tShift+Ctrl+S", ID_SAVEAS
+        MENUITEM SEPARATOR
+        MENUITEM "終了(&X)\tAlt+F4", ID_EXIT
+    }
+    POPUP "ズーム(&Z)"
+    {
+        MENUITEM "ズームイン(&I)\tCtrl+I", ID_ZOOMIN
+        MENUITEM "ズームアウト(&O)\tCtrl+U", ID_ZOOMOUT
+        MENUITEM SEPARATOR
+        MENUITEM "25%", ID_ZOOM25
+        MENUITEM "50%", ID_ZOOM50
+        MENUITEM "100%", ID_ZOOM100
+        MENUITEM "150%", ID_ZOOM150
+        MENUITEM "200%", ID_ZOOM200
+    }
+    POPUP "回転(&R)"
+    {
+        MENUITEM "-0.1度\tShift+Ctrl+←", ID_MINUS0_1
+        MENUITEM "+0.1度\tShift+Ctrl+→", ID_PLUS0_1
+        MENUITEM "-1度\tCtrl+←", ID_MINUS1
+        MENUITEM "+1度\tCtrl+→", ID_PLUS1
+        MENUITEM "-10度\tCtrl+↑", ID_MINUS10
+        MENUITEM "+10度\tCtrl+↓", ID_PLUS10
+        MENUITEM "-30度\tShift+Ctrl+↑", ID_MINUS30
+        MENUITEM "+30度\tShift+Ctrl+↓", ID_PLUS30
+        MENUITEM "-90度", ID_MINUS90
+        MENUITEM "+90度", ID_PLUS90
+        MENUITEM SEPARATOR
+        MENUITEM "角度を指定(&A)...\tCtrl+A", ID_ANGLE
+        MENUITEM SEPARATOR
+        MENUITEM "広げる(&G)\tCtrl+G", ID_GROW
+    }
+    POPUP "背景(&B)"
+    {
+        MENUITEM "背景を透明にする(&T)", ID_TRANS
+        MENUITEM "背景色(&B)...\tCtrl+B", ID_BACK
+    }
+    POPUP "ヘルプ(&H)"
+    {
+        MENUITEM "TurnPix について(&A)", ID_ABOUT
+    }
+}
+
+IDD_ANGLE DIALOG 0, 0, 125, 55
+STYLE DS_MODALFRAME | DS_CENTER | WS_CAPTION | WS_SYSMENU
+CAPTION "角度の入力"
+FONT 9, "ＭＳ Ｐゴシック"
+{
+    LTEXT           "角度(&A):", -1, 10, 10, 30, 10
+    EDITTEXT        edt1, 45, 7, 41, 14
+    LTEXT           "度", -1, 95, 10, 15, 10
+    DEFPUSHBUTTON   "OK", IDOK, 10, 30, 45, 14
+    PUSHBUTTON      "キャンセル", IDCANCEL, 70, 30, 45, 14
+}
+
+IDD_ABOUT DIALOG 0, 0, 150, 90
+STYLE DS_MODALFRAME | DS_CENTER | WS_CAPTION | WS_SYSMENU
+CAPTION "TurnPix について"
+FONT 9, "ＭＳ Ｐゴシック"
+{
+    ICON    1, -1, 10, 10, 18, 21
+    LTEXT   "TurnPix ver. 1.7.1", -1, 36, 12, 105, 10
+    LTEXT   "片山博文MZ", -1, 35, 30, 105, 10
+    LTEXT   "katayama.hirofumi.mz@gmail.com", -1, 35, 46, 105, 10
+    DEFPUSHBUTTON   "OK", IDOK, 52, 70, 45, 14
+}
+
+STRINGTABLE
+{
+    1, "TurnPix by 片山博文MZ"
+    2, "%s - TurnPix by 片山博文MZ"
+    3, "画像 (*.bmp;*.gif;*.jpg;*.jpeg;*.jpe;*.jfif;*.png;*.tif;*.tiff)"
+    4, "*.bmp;*.gif;*.jpg;*.jpeg;*.jpe;*.jfif;*.png;*.tif;*.tiff"
+    5, "すべてのファイル (*.*)"
+    6, "*.*"
+    7, "BMP (*.bmp)"
+    8, "*.bmp"
+    9, "GIF (*.gif)"
+    10, "*.gif"
+    11, "JPEG (*.jpg;*.jpeg;*.jpe;*.jfif)"
+    12, "*.jpg;*.jpeg;*.jpe;*.jfif"
+    13, "PNG (*.png)"
+    14, "*.png"
+    15, "現在の角度 %.2lf 度、ズーム倍率%d％"
+    16, "準備完了"
+    17, "ファイルを開けませんでした。"
+    18, "ファイルを保存できませんでした。"
+    19, "この形式にすると、色彩の情報が失われる可能性があります。\n続行しますか？"
+    20, "背景色の設定"
+    21, "GIFの透過色を設定してください"
+    22, "TIFF (*.tif;*.tiff)"
+    23, "*.tif;*.tiff"
+}
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION     1,7,1,0
+PRODUCTVERSION  1,7,1,0
+FILEOS          VOS_NT_WINDOWS32
+FILETYPE        VFT_APP
+{
+    BLOCK "StringFileInfo"
+    {
+        BLOCK "041104B0"
+        {
+            VALUE "CompanyName", "片山博文MZ\0"
+            VALUE "FileDescription", "画像を回転するソフトです。\0"
+            VALUE "FileVersion", "1.7.1\0"
+            VALUE "InternalName", "turnpix\0"
+            VALUE "LegalCopyright", "(C) 片山博文MZ. All rights reserved.\0"
+            VALUE "OriginalFilename", "turnpix.exe\0"
+            VALUE "ProductName", "TurnPix\0"
+            VALUE "ProductVersion", "1.7.1\0"
+        }
+    }
+    BLOCK "VarFileInfo"
+    {
+        VALUE "Translation", 0x0411, 0x04B0
+    }
+}
